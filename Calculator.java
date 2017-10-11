@@ -2,21 +2,60 @@
 import java.util.Scanner;
 public class Calculator
 {
+    private int _mode;
+    Scanner Keyboard = new Scanner (System.in);
+    
+    public Calculator(int mode){
+		_mode = mode;
+	}
+    
+    /* Extracted the calculation from the main method and created its own method*/
+    
+    public  void calculate(int mode){
+	int firstNum;
+	int solution;
+	int secondNum;
+	if ( mode == 1 ){
+		System.out.println("Enter 1st number to Add");
+		firstNum=Integer.parseInt(Keyboard.nextLine ());
+		System.out.println("Enter 2nd number to Add");
+		secondNum=Integer.parseInt(Keyboard.nextLine ());
+		solution = add(firstNum, secondNum);
+		System.out.printf("%d + %d equals %d\n", firstNum, secondNum, solution);
+	}
+	if ( mode == 2 ){
+		System.out.println("Enter 1st number to Subtract");
+		firstNum=Integer.parseInt(Keyboard.nextLine ());
+		System.out.println("Enter 2nd number to Subtract");
+		secondNum=Integer.parseInt(Keyboard.nextLine ());
+		solution = subtract(firstNum, secondNum);
+		System.out.printf("%d - %d equals %d\n", firstNum, secondNum, solution);
+	}
+	if ( mode == 3 ){
+		System.out.println("Enter 1st number to Multiply");
+		firstNum=Integer.parseInt(Keyboard.nextLine ());
+		System.out.println("Enter 2nd number to Multiply");
+		secondNum=Integer.parseInt(Keyboard.nextLine ());
+		solution = multiply(firstNum, secondNum);
+		System.out.printf("%d * %d equals %d\n", firstNum, secondNum, solution);
+	}
+	}
     
     
+    //Renamed the methods to improve clarity
     
-    public static int method1(int firstNum, int secondNum){
+    public static int add(int firstNum, int secondNum){ 
 		int answer;
 		answer = firstNum + secondNum;
 		return answer;
 	}
 
-	public static int method2(int firstNum, int secondNum){
+	public static int subtract(int firstNum, int secondNum){
 		int answer;
 		answer = firstNum - secondNum;
 		return answer;
 	}
-	public static int method3(int firstNum, int secondNum){
+	public static int multiply(int firstNum, int secondNum){
 		int answer;
 		answer = firstNum * secondNum;
 		return answer;
@@ -25,39 +64,14 @@ public class Calculator
     
     public static void main (String [] args)
     {
-	int mode;
-	int firstNum;
-	int solution;
-	int secondNum;
-	int numArray[] = new int[5];
+	
+
 	Scanner Keyboard = new Scanner (System.in);
 	System.out.println("Press 1 to Add, 2 to subtract, or 3 to Multiply");
-	mode=Integer.parseInt(Keyboard.nextLine ());
-	if ( mode == 1 ){
-		System.out.println("Enter 1st number to Add");
-		firstNum=Integer.parseInt(Keyboard.nextLine ());
-		Integer.parseInt(Keyboard.nextLine ());
-		System.out.println("Enter 2nd number to Add");
-		secondNum=Integer.parseInt(Keyboard.nextLine ());
-		solution = method1(firstNum, secondNum);
-		System.out.printf("%d + %d equals %d\n", firstNum, secondNum, solution);
-	}
-	if ( mode == 2 ){
-		System.out.println("Enter 1st number to Subtract");
-		firstNum=Integer.parseInt(Keyboard.nextLine ());
-		System.out.println("Enter 2nd number to Subtract");
-		secondNum=Integer.parseInt(Keyboard.nextLine ());
-		solution = method2(firstNum, secondNum);
-		System.out.printf("%d - %d equals %d\n", firstNum, secondNum, solution);
-	}
-	if ( mode == 3 ){
-		System.out.println("Enter 1st number to Multiply");
-		firstNum=Integer.parseInt(Keyboard.nextLine ());
-		System.out.println("Enter 2nd number to Multiply");
-		secondNum=Integer.parseInt(Keyboard.nextLine ());
-		solution = method3(firstNum, secondNum);
-		System.out.printf("%d * %d equals %d\n", firstNum, secondNum, solution);
-	}
+	int mode=Integer.parseInt(Keyboard.nextLine ());
+	Calculator calc = new Calculator(mode);
+	calc.calculate(mode);
+
 	
 }
 }
