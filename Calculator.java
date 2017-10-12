@@ -2,7 +2,11 @@
 import java.util.Scanner;
 public class Calculator
 {
-    private int _mode;
+    private OperationType _mode;
+	static final int ADDITION = 1;
+    static final int SUBTRACTION = 2;
+    static final int MULTIPLICATION = 3;
+
     Scanner Keyboard = new Scanner (System.in);
     
     public Calculator(int mode){
@@ -11,11 +15,23 @@ public class Calculator
 	}
     
     int getMode(){
-		return _mode;
+		return _mode.getTypeCode();
 	}
 	
 	void setMode(int arg){
-		_mode = arg;
+		switch(arg){
+			case ADDITION:
+				_mode = new Addition();
+				break;
+			case SUBTRACTION:
+				_mode = new Subtraction();
+				break;
+			case MULTIPLICATION:
+				_mode = new Multiplication();
+				break;
+			default:
+				throw new IllegalArgumentException("Incorrect Calculator mode");
+		}
 	} 
 	
     /* Extracted the calculation from the main method and created its own method*/
@@ -25,7 +41,7 @@ public class Calculator
 		int solution;
 		int secondNum;
 		
-		if ( getMode() == 1 ){
+		if ( getMode() == OperationType.ADDITION ){
 			System.out.println("Enter 1st number to Add");
 			firstNum=Integer.parseInt(Keyboard.nextLine ());
 			System.out.println("Enter 2nd number to Add");
@@ -33,7 +49,7 @@ public class Calculator
 			solution = add(firstNum, secondNum);
 			System.out.printf("%d + %d equals %d\n", firstNum, secondNum, solution);
 		}
-		if ( getMode() == 2 ){
+		if ( getMode() == OperationType.SUBTRACTION ){
 			System.out.println("Enter 1st number to Subtract");
 			firstNum=Integer.parseInt(Keyboard.nextLine ());
 			System.out.println("Enter 2nd number to Subtract");
@@ -41,7 +57,7 @@ public class Calculator
 			solution = subtract(firstNum, secondNum);
 			System.out.printf("%d - %d equals %d\n", firstNum, secondNum, solution);
 		}
-		if ( getMode() == 3 ){
+		if ( getMode() == OperationType.MULTIPLICATION ){
 			System.out.println("Enter 1st number to Multiply");
 			firstNum=Integer.parseInt(Keyboard.nextLine ());
 			System.out.println("Enter 2nd number to Multiply");
