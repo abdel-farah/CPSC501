@@ -6,39 +6,49 @@ public class Calculator
     Scanner Keyboard = new Scanner (System.in);
     
     public Calculator(int mode){
-		_mode = mode;
+		
+		setMode (mode);
 	}
     
+    int getMode(){
+		return _mode;
+	}
+	
+	void setMode(int arg){
+		_mode = arg;
+	} 
+	
     /* Extracted the calculation from the main method and created its own method*/
     
     public  void calculate(int mode){
-	int firstNum;
-	int solution;
-	int secondNum;
-	if ( mode == 1 ){
-		System.out.println("Enter 1st number to Add");
-		firstNum=Integer.parseInt(Keyboard.nextLine ());
-		System.out.println("Enter 2nd number to Add");
-		secondNum=Integer.parseInt(Keyboard.nextLine ());
-		solution = add(firstNum, secondNum);
-		System.out.printf("%d + %d equals %d\n", firstNum, secondNum, solution);
-	}
-	if ( mode == 2 ){
-		System.out.println("Enter 1st number to Subtract");
-		firstNum=Integer.parseInt(Keyboard.nextLine ());
-		System.out.println("Enter 2nd number to Subtract");
-		secondNum=Integer.parseInt(Keyboard.nextLine ());
-		solution = subtract(firstNum, secondNum);
-		System.out.printf("%d - %d equals %d\n", firstNum, secondNum, solution);
-	}
-	if ( mode == 3 ){
-		System.out.println("Enter 1st number to Multiply");
-		firstNum=Integer.parseInt(Keyboard.nextLine ());
-		System.out.println("Enter 2nd number to Multiply");
-		secondNum=Integer.parseInt(Keyboard.nextLine ());
-		solution = multiply(firstNum, secondNum);
-		System.out.printf("%d * %d equals %d\n", firstNum, secondNum, solution);
-	}
+		int firstNum;
+		int solution;
+		int secondNum;
+		
+		if ( getMode() == 1 ){
+			System.out.println("Enter 1st number to Add");
+			firstNum=Integer.parseInt(Keyboard.nextLine ());
+			System.out.println("Enter 2nd number to Add");
+			secondNum=Integer.parseInt(Keyboard.nextLine ());
+			solution = add(firstNum, secondNum);
+			System.out.printf("%d + %d equals %d\n", firstNum, secondNum, solution);
+		}
+		if ( getMode() == 2 ){
+			System.out.println("Enter 1st number to Subtract");
+			firstNum=Integer.parseInt(Keyboard.nextLine ());
+			System.out.println("Enter 2nd number to Subtract");
+			secondNum=Integer.parseInt(Keyboard.nextLine ());
+			solution = subtract(firstNum, secondNum);
+			System.out.printf("%d - %d equals %d\n", firstNum, secondNum, solution);
+		}
+		if ( getMode() == 3 ){
+			System.out.println("Enter 1st number to Multiply");
+			firstNum=Integer.parseInt(Keyboard.nextLine ());
+			System.out.println("Enter 2nd number to Multiply");
+			secondNum=Integer.parseInt(Keyboard.nextLine ());
+			solution = multiply(firstNum, secondNum);
+			System.out.printf("%d * %d equals %d\n", firstNum, secondNum, solution);
+		}
 	}
     
     
