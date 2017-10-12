@@ -1,4 +1,7 @@
-
+/* Abdulaziz Farah
+ * Calculator program
+ * performs 3 operations, subtract, add, and multiplay
+ */
 
 import java.util.Scanner;
 public class Calculator
@@ -38,17 +41,35 @@ public class Calculator
 	
     /* Extracted the calculation from the main method and created its own method*/
     
-    public  void calculate(int firstNum, int secondNum) // added parameters
+    public  void calculate(int firstNum, int secondNum) // added parameters, removed mode as a parameter
     { 
 		
-    	_mode.calculate(firstNum, secondNum);
+    	_mode.calculate(firstNum, secondNum);		//removed conditional statements
 	}
     
     
     //Renamed the methods to improve clarity
     
-  
+  /* ADDED THESE THREE METHODS BACK JUST TO USE IN MY JUNIT TEST, NOT USED IN MY PROGRAM*/
     
+    
+    static int  add(int firstNum, int secondNum) {
+		  int solution = firstNum + secondNum;
+		  System.out.printf("%d + %d equals %d\n", firstNum, secondNum, solution);
+		  return solution;
+    }
+    
+    static int multiply(int firstNum, int secondNum) {
+		  int solution = firstNum * secondNum;
+		  System.out.printf("%d * %d equals %d\n", firstNum, secondNum, solution);
+		  return solution;
+    }
+    
+    static int subtract(int firstNum, int secondNum) {
+		  int solution = firstNum - secondNum;
+		  System.out.printf("%d - %d equals %d\n", firstNum, secondNum, solution);
+		  return solution;
+    }
     public static void main (String [] args)
     {
 	int firstNum, secondNum;
@@ -64,7 +85,7 @@ public class Calculator
 	System.out.println("Enter 2nd number");
 	secondNum=Integer.parseInt(Keyboard.nextLine ());
 	calc.calculate( firstNum, secondNum);
-
+	Keyboard.close();
 	
 }
 }
