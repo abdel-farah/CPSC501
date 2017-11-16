@@ -1,4 +1,8 @@
 
 public class arrayObject {
-	Object[] objData = new Object[10];
+	public Object data[]; 
+	
+	public arrayObject(){
+		this.data = new Object[5];
+	}
 }

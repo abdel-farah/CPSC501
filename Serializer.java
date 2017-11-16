@@ -34,7 +34,6 @@ public class Serializer {
 		//Element serial = new Element("serializable");
 		File input = new File("result3.xml");
 		document = saxBuilder.build(input);
-		System.out.println("Root element ;" + document.getRootElement().getName());
 		
 		Element Root = new Element("serializable");
 		Element object = new Element("object");
@@ -42,6 +41,7 @@ public class Serializer {
 		
 		document.setRootElement(Root);
 		object.setAttribute("class", obj.getClass().getName());
+		String className = object.getAttributeValue("class");
 		object.setAttribute("id", Integer.toString(java.lang.System.identityHashCode(obj)));
 		Field[] fArray = obj.getClass().getDeclaredFields();
 		System.out.println("number of fields in the object: " + fArray.length);
@@ -71,6 +71,14 @@ public class Serializer {
 				}
 				//For object array
 				else {	
+			
+					for ( int j = 0; j < Array.getLength(o); j++){
+						Element reference = new Element("reference");
+						reference.addContent(Integer.toString(java.lang.System.identityHashCode(obj)));
+						reference.detach();
+						//field.addContent(reference);
+						object.addContent(reference);
+					}	
 				}	
 			}
 			 if (fArray[i].getType().isPrimitive()){
@@ -82,7 +90,7 @@ public class Serializer {
 				object.addContent(field);
 			}
 			
-			 else {
+			 else if (className == "objRef") {
 				System.out.println("GOT HERE");
 				Element reference = new Element("reference");
 				reference.addContent(Integer.toString(java.lang.System.identityHashCode(obj)));

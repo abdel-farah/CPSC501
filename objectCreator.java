@@ -27,13 +27,19 @@ public class objectCreator {
 					break;
 			case 3: object = createArrayPrimitives();
 					break;
-			case 4: createArrayObject();
+			case 4: object = createArrayObject();
 					break;
 		}
 		Serializer s = new Serializer(object);
 		//s.serialize(object);
 		Deserializer d = new Deserializer(s.serialize(object));
-		d.deserializer(s.serialize(object));
+		
+		Object finalObject = d.deserializer(s.serialize(object));
+		Visualizer v = new Visualizer();
+			v.visualize(finalObject);
+		
+		
+			
 		keyboard.close();
 	}
 /*
@@ -61,9 +67,65 @@ public class objectCreator {
     
 	}
 	*/
-	private static void createArrayObject() {
-		// TODO Auto-generated method stub
-		
+	private static Object createArrayObject() throws Exception {
+		Scanner keyboard = new Scanner(System.in);
+		   // int initial[] = new int[5]; 
+			//arrayPrimitives primArray = new arrayPrimitives(intial);
+			Class classObject = Class.forName("arrayObject");
+			Constructor c = classObject.getConstructor(new Class[] {});
+			Object objArray = c.newInstance();
+			
+		//	Class classA = Class.forName("ClassA");
+			//Constructor c2 = classA.getConstructor();
+		//	Object classAObj = c2.newInstance();
+			//Object classAObj = null;		
+			Field data = classObject.getDeclaredField("data");
+		//	Field intVar = classA.getDeclaredField("intVar");
+			Object array = Array.newInstance(Object.class, 5);
+			boolean t = array.getClass().isArray();
+			System.out.println(t);
+			System.out.println("Would you like to set the values in this array?\n\nPress 1 to change values\nPress 0 to keep initial values");
+			int answer = keyboard.nextInt();
+		//	boolean flag = true;
+			int i = 0;
+			
+			if ( answer == 1){
+				while( i < 5){
+					Class classA = Class.forName("ClassA");
+					Constructor c2 = classA.getConstructor();
+					Object classAObj = c2.newInstance();
+
+					Array.set(array, i, classAObj);
+					data.set(objArray, array);
+
+					System.out.println("Array at [" + i + "] =" + Array.get(array, i).getClass().getDeclaredField("intVar").getInt(classAObj));
+					i++;
+				}
+				data.set(objArray, array);
+
+				for(int w = 0; w < 5; w++){
+				System.out.println("Enter the value for the array at index:" + w);
+				int value = keyboard.nextInt();
+				Field intVar = Array.get(array, w).getClass().getDeclaredField("intVar");
+				Object currentObject = Array.get(array, w);
+				intVar.set(currentObject, value);
+				}
+
+				//data.set(obj, array);
+				System.out.println("Updated array");
+				for (int j =0; j < 5; j++){
+					System.out.println("Array at [" + j + "] =" + Array.get(array, j).getClass().getDeclaredField("intVar").get(Array.get(array, j)));
+				}
+			}
+			else{
+				System.out.println("Object created");
+				data.set(objArray, array);
+				for (int j =0; j < 5; j++){
+					System.out.println("Array at [" + j + "] =" + Array.get(array, j));
+				}
+			}
+			System.out.println("CLASS NAME= " + objArray.getClass().getName());
+			return objArray;		
 	}
 
 	private static Object createArrayPrimitives() throws Exception{

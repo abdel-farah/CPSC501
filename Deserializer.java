@@ -100,7 +100,10 @@ public class Deserializer{
 			sp2DoubleVar.set(sp2, Double.parseDouble(innerFieldObj2.get(1).getValue()));
 			obj1.set(object, sp1);
 			obj2.set(object, sp2);
-			
+		
+			if (className == "arrayObject"){
+				
+			}
 		}
 		
 		
