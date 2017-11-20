@@ -20,7 +20,7 @@ public class Serializer {
 	public Serializer(Object obj){
 		this.obj = obj;
 	}
-	public Document  serialize (Object obj) {
+	public Document  serialize (Object obj) throws Exception {
 		Document document = new Document();
 
 		try{
@@ -78,6 +78,20 @@ public class Serializer {
 						reference.detach();
 						//field.addContent(reference);
 						object.addContent(reference);
+						Element inObj = new Element("object");
+						inObj.setAttribute("class", Array.get(o, j).getClass().getName());
+						inObj.setAttribute("id", Integer.toString(java.lang.System.identityHashCode(obj)));
+						inObj.detach();
+						reference.addContent(inObj);
+						Field[] innerfArray = fArray[i].getType().getFields();
+						Element value = new Element("value");
+						System.out.println("Name of array class" +  Array.get(o, j).getClass().getDeclaredField("intVar"));
+						Object classAObj = Array.get(o, j);
+						System.out.println("value at [ " + j + " ] = " + Array.get(o, j).getClass().getDeclaredField("intVar").get(classAObj).toString());
+						value.addContent(Array.get(o, j).getClass().getDeclaredField("intVar").get(classAObj).toString());
+						value.detach();
+						inObj.addContent(value);
+
 					}	
 				}	
 			}
